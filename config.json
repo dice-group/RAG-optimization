@@ -1,0 +1,30 @@
+{
+  "chunk_size": 512,
+  "chunk_overlap": 50,
+  "embedding_model": "all-MiniLM-L6-v2",
+  "vector_size": {
+    "all-MiniLM-L6-v2": 384
+  },
+  "top_k": 5,
+  "num_predict": {
+    "WikiEval": 1024,
+    "HotpotQA": 512,
+    "RAGMiniBioasq": 1024
+  },
+  "prompt":  "Use the following context to answer the question. If the context does not contain enough information, say so. Do not use markdown or any special formatting in your answer.\\n\\nContext: \n{context}\\n\\nQuestion: {question}\\n\\nAnswer:",
+  "persona_judge": {
+    "personas": {
+      "accuracy": 
+        "You are a strict fact-checker. Evaluate the quality of the response provided by an AI assistant to the user question displayed below. Your evaluation should focus on factual accuracy compared to the reference answer. Begin your evaluation by providing a short explanation. Be as objective as possible. After providing your explanation, please rate the response on a scale of 1 to 10 by strictly following this format: \"Rating: [[rating]]\", for example: \"Rating: [[5]]\".",
+    "completeness":
+        "You are an expert evaluator focused on completeness. Evaluate the quality of the response provided by an AI assistant to the user question displayed below. Your evaluation should focus on whether the response covers all key points present in the reference answer. Begin your evaluation by providing a short explanation. Be as objective as possible. After providing your explanation, please rate the response on a scale of 1 to 10 by strictly following this format: \"Rating: [[rating]]\", for example: \"Rating: [[5]]\".",
+    "relevance":
+        "You are an evaluator focused on relevance. Evaluate the quality of the response provided by an AI assistant to the user question displayed below. Your evaluation should focus on how directly and relevantly the response addresses the question. Begin your evaluation by providing a short explanation. Be as objective as possible. After providing your explanation, please rate the response on a scale of 1 to 10 by strictly following this format: \"Rating: [[rating]]\", for example: \"Rating: [[5]]\"."
+    },
+    "template": "{system_prompt}\n\n[Question]\n{question}\n\n[Reference Answer]\n{golden_answer}\n\n[The Start of Assistant's Answer]\n{generated_answer}\n[The End of Assistant's Answer]"
+  },
+  "answer_correctness_judge": {
+    "system_prompt": "You are CompareGPT, a machine to verify the correctness of predictions. Answer with only yes/no. You are given a question, the corresponding ground-truth answer and a prediction from a model. Compare the \"Ground-truth answer\" and the \"Prediction\" to determine whether the prediction correctly answers the question. All information in the ground-truth answer must be present in the prediction, including numbers and dates. You must answer \"no\" if there are any specific details in the ground-truth answer that are not mentioned in the prediction. There should be no contradicting statements in the prediction. The prediction may contain extra information. If the prediction states something as a possibility, treat it as a definitive answer.",
+    "template": "{system_prompt}\n\nQuestion: {question}\nGround-truth answer: {golden_answer}\nPrediction: {generated_answer}\nCompareGPT response:"
+  }
+}

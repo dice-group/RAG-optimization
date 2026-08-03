@@ -1,0 +1,4 @@
+metric,friedman_statistic,p_value,significant
+faithfulness,17.8086218158,0.0031960696,True
+answer_correctness,32.1092757306,0.0000056524,True
+semantic_similarity,34.0279542567,0.0000023507,True
