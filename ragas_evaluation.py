@@ -16,7 +16,7 @@ from ragas.metrics.collections import Faithfulness, AnswerCorrectness, SemanticS
 
 load_dotenv()
 
-methods = ["bertscore", "contrastive", "persona", "naive", "token_recall", "ans_corr"] # ans_corr = answer correctness judge
+methods = ["bertscore", "contrastive", "persona", "naive", "token_recall", "answer_correctness"]
 llms = ["gpt", "gemma3", "mistral"]
 
 def results_dir(method, llm):

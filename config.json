@@ -11,7 +11,7 @@
     "HotpotQA": 512,
     "RAGMiniBioasq": 1024
   },
-  "prompt":  "Use the following context to answer the question. If the context does not contain enough information, say so. Do not use markdown or any special formatting in your answer.\\n\\nContext: \n{context}\\n\\nQuestion: {question}\\n\\nAnswer:",
+  "prompt":  "Use the following context to answer the question. If the context does not contain enough information, say so. Do not use markdown or any special formatting in your answer.\n\nContext: \n{context}\n\nQuestion: {question}\n\nAnswer:",
   "persona_judge": {
     "personas": {
       "accuracy": 

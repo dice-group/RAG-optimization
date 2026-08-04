@@ -1,14 +1,11 @@
-import logging_setup
-
 import argparse
 import json
 import logging
+from logging_setup import setup_logging
 import pathlib
 import re
 import time
-
 import requests
-
 from pipeline import get_dataset_path, load_qa_pairs
 import load_config as config
 
@@ -103,10 +100,10 @@ def run(dataset_name, output_path):
 
 
 if __name__ == "__main__":
+    setup_logging()
     parser = argparse.ArgumentParser()
     parser.add_argument("--dataset", type=str, default="WikiEval")
     parser.add_argument("--output", type=str, default="negatives/WikiEval/negatives.json")
     args = parser.parse_args()
 
-    logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s", force=True)
     run(args.dataset, args.output)

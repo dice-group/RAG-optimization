@@ -168,7 +168,7 @@ Set `LLM_NAME` in the `.env` file to the generator model and run:
 python naive_rag.py \
   --dataset <dataset-name> \
   --n_folds 5 \
-  --output_dir <output-directory>
+  --output_dir naive_rag_results_<generator>
 ```
 
 ### Running the optimization
@@ -181,23 +181,24 @@ python run_optimization.py \
   --dataset <dataset-name> \
   --n_trials 25 \
   --n_folds 5 \
-  --output_dir <output-directory>
+  --output_dir optimization_results_<method>_<generator>
 ```
-Generate the plausible incorrect answers required by the Contrastive objective:
+Generate the plausible incorrect answers required by the Contrastive objective. These answers are generated beforehand and are reused during optimization:
 
 ```bash
 python generate_negatives.py \
-  --dataset WikiEval \
-  --output negatives/WikiEval/negatives.json
+  --dataset <dataset-name> \
+  --output negatives/<dataset-name>/negatives.json
 
 python run_optimization.py \
   --method contrastive \
-  --dataset WikiEval \
+  --dataset <dataset-name> \
   --n_trials 25 \
   --n_folds 5 \
-  --negatives <path-to-negative-answers> \
-  --output_dir optimization_results/contrastive
+  --negatives negatives/<dataset-name>/negatives.json \
+  --output_dir optimization_results_contrastive_<generator>
 ```
+The accepted labels for `<optimization-objective>` are `bertscore`, `answer_correctness`, `persona`, `contrastive`, and `token_recall` and the labels for `<generator>` are `gemma3`, `gpt`, and `mistral`.
 
 ### Final RAGAS evaluation
 
@@ -209,7 +210,7 @@ python ragas_evaluation.py \
   --dataset <dataset-name> \
   --output_dir ragas_eval_results
 ```
-The accepted method labels are `naive`, `bertscore`, `contrastive`, `persona`, `token_recall`, and `ans_corr`, where `ans_corr` refers to the Correctness Judge. The accepted generator labels are `gemma3`, `gpt`, and `mistral`.
+RAGAS Evaluation accepts these `<method>` labels `naive`, `bertscore`, `contrastive`, `persona`, `token_recall`, and `answer_correctness`. The accepted `<generator>` labels are `gemma3`, `gpt`, and `mistral`.
 
 ## Detailed experiment results
 ```
@@ -225,3 +226,10 @@ The `results/` directory contains the detailed results underlying the aggregate 
 - **`optimization_trials.csv`**: The hyperparameter configuration, objective score, runtime, and number of indexed chunks for each completed optimization trial.
 - **`friedman_results.csv`**: The Friedman test statistic, p-value, and significance decision for each evaluation metric.
 - **`nemenyi_pairwise_comparisons_all_methods.csv`**: The complete pairwise Nemenyi comparisons among all evaluated methods for each evaluation metric.
+
+### Computational Environment
+
+| Datasets | GPU | CPU | CPU threads | RAM |
+|---|---|---|---:|---:|
+| WikiEval | 2 × NVIDIA GeForce RTX 3090 | AMD EPYC 7282 | 16 | 256 GB |
+| HotpotQA and RAGMiniBioASQ | 2 × NVIDIA GeForce RTX 3090| AMD EPYC 7713P | 128 | 1 TB |
