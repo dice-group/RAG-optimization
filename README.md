@@ -126,11 +126,11 @@ The exact prompts for answer generation, the Correctness Judge, and the three Pe
 
 ### Dataset characteristics
 
-| Dataset | Characteristics | Original QA pairs | QA pairs used | Maximum generated tokens |
-|---|---|---:|---:|---:|
-| WikiEval | Wikipedia-based factual question answering | 50 | 50 | 1024 |
-| HotpotQA | Multi-hop Wikipedia question answering | 113,000 | 150 | 512 |
-| RAGMiniBioasq | Biomedical question answering | 4,720 | 150 | 1024 |
+| Dataset | Characteristics |Language| Original QA pairs | QA pairs used | Maximum generated tokens |
+|---|---|---|---:|---:|---:|
+| WikiEval | Wikipedia-based factual question answering | English | 50 | 50 | 1024 |
+| HotpotQA | Multi-hop Wikipedia question answering | English | 113,000 | 150 | 512 |
+| RAGMiniBioasq | Biomedical question answering | English | 4,720 | 150 | 1024 |
 
 ### Dataset preparation
 
